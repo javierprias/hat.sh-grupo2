@@ -1,114 +1,75 @@
 import { createTheme } from "@material-ui/core/styles";
-import { FormControlLabel, Switch } from "@material-ui/core";
-import { useState } from "react";
-import { getTranslations as t } from "../../locales";
 
-export const Theme = createTheme({
+export const hackerTheme = createTheme({
   palette: {
-    primary: {
-      main: "#464653",
+    type: "dark",
+    background: {
+      default: "#000000",
+      paper: "#0a0a0a",
     },
-    white: {
-      main: "#ffffff",
+    primary: { main: "#00ff99" },
+    secondary: { main: "#00e6b8" },
+    text: {
+      primary: "#00ff99",
+      secondary: "#66ffcc",
     },
 
-    alabaster: {
-      main: "#fafafa",
-      dark: "#303030",
-    },
-
-    mountainMist: {
-      main: "#9791a1",
-    },
-    gallery: {
-      main: "#ebebeb",
-    },
-    cinnabar: {
-      main: "#e74c3c",
-    },
-    denim: {
-      main: "#1976d2",
-    },
-    hawkesBlue: {
-      main: "#d0e5f5",
-      light: "#e3f2fd",
-    },
-    mineShaft: {
-      main: "#3f3f3f",
-    },
-    emperor: {
-      main: "#525252",
-    },
-    mercury: {
-      main: "#e9e9e9",
-      light: "#f3f3f3",
-    },
-    alto: {
-      main: "#e1e1e1",
-      light: "#ebebeb",
-    },
+    // 🎨 Colores antiguos y extendidos para compatibilidad total
+    alabaster: { main: "#000000" },
+    mineShaft: { main: "#00ff99" },
+    gallery: { main: "#0a0a0a" },
+    white: { main: "#00ff99" },
+    diamondBlack: { main: "#000000" },
+    alto: { main: "#0a0a0a", light: "#1a1a1a" },
+    mountainMist: { main: "#00cc99" },
+    emperor: { main: "#00b377" },
+    iron: { main: "#222222" },
+    silverChalice: { main: "#999999" },
+    mercury: { main: "#1a1a1a", light: "#0d0d0d" },
     flower: {
-      main: "#fdecea",
-      light: "#fadbd7",
-      text: "#611a15",
+      main: "#00ff99",     // verde neón
+      light: "#33ffaa",    // hover verde brillante
+      text: "#000000",     // texto negro sobre verde
     },
+    // 🌿 Nuevo color usado en EncryptionPanel y DecryptionPanel
     cottonBoll: {
-      main: "#e8f4fd",
-      light: "#c9e1f2",
-      text: "#0d3c61",
+      main: "#66ffcc",
+      text: "#99ffd6", // verde claro para textos secundarios
     },
-    diamondBlack : {
-      main: "rgba(0, 0, 0, 0.54)",
-    }
+  },
+
+  typography: {
+    fontFamily: "'Share Tech Mono', monospace",
+    allVariants: { color: "#00ff99" },
+  },
+
+  overrides: {
+    MuiButton: {
+      root: {
+        borderRadius: "8px",
+        border: "1px solid #00ff99",
+        color: "#00ff99",
+        transition: "0.3s",
+        "&:hover": {
+          backgroundColor: "#003322",
+          boxShadow: "0 0 10px #00ff99",
+        },
+      },
+    },
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: "#000000",
+        color: "#00ff99",
+      },
+    },
   },
 });
 
-export const checkTheme = () => {
-  
+// ✅ Aplica el fondo hacker global
+export function checkTheme() {
   if (typeof window !== "undefined") {
-    let darkMode = window.localStorage.getItem("darkTheme");
-
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      if (localStorage) {
-        if(darkMode != 0) {
-          localStorage.setItem("darkTheme", "1");
-          document.querySelector("html").classList.add("darkStyle");
-        }
-      }
-    }
-
-    if (darkMode > 0) {
-      document.querySelector("html").classList.add("darkStyle");
-    }
+    document.body.style.backgroundColor = "#000000";
+    document.body.style.color = "#00ff99";
+    document.body.style.fontFamily = "'Share Tech Mono', monospace";
   }
-
 }
-
-
-export const DarkMode = () => {
-  const [checked, setchecked] = useState(document.querySelector("html").classList.contains("darkStyle"))
-
-  const changeTheme = () => {
-    if (localStorage) {
-      if (!checked) {
-        localStorage.setItem("darkTheme", "1");
-        document.querySelector("html").classList.add("darkStyle");
-        setchecked(true)
-      } else {
-        localStorage.setItem("darkTheme", "0");
-        document.querySelector("html").classList.remove("darkStyle");
-        setchecked(false)
-      }
-    }
-  };
-
-  return (
-    <FormControlLabel
-      value="darkModeEnabled"
-      control={<Switch color="primary" checked={checked}  onChange={() => changeTheme()} />}
-      label={t('dark_mode')}
-      labelPlacement="start"
-    />
-  );
-};
-

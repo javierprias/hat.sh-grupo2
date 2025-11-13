@@ -6,6 +6,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
         <Head />
         <body>
           <Main />
