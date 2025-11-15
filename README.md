@@ -67,7 +67,7 @@ La interfaz de **Hat.sh Reforged – Grupo 2** fue rediseñada completamente par
 ## 🔗 Repositorios del Proyecto  
 
 🐳 **Docker Hub:** [https://hub.docker.com/r/jonateven12/hat2.sh](https://hub.docker.com/r/jonateven12/hat2.sh)  
-💻 **GitHub:** [https://github.com/jonateven/hat2.sh](https://github.com/jonateven/hat2.sh)  
+💻 **GitHub:** https://github.com/javierprias/hat.sh-grupo2.git
 
 ---
 
