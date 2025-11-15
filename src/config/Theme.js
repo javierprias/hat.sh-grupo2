@@ -1,24 +1,25 @@
 import { createTheme } from "@material-ui/core/styles";
 
+// 🌌 Tema Hacker con buen contraste
 export const hackerTheme = createTheme({
   palette: {
     type: "dark",
     background: {
-      default: "#000000",
-      paper: "#0a0a0a",
+      default: "#000000", // fondo negro principal
+      paper: "#0a0a0a",   // fondos de tarjetas/containers
     },
-    primary: { main: "#00ff99" },
-    secondary: { main: "#00e6b8" },
+    primary: { main: "#00ff99" },  // verde neón para elementos principales
+    secondary: { main: "#00e6b8" }, // verde brillante secundario
     text: {
-      primary: "#00ff99",
-      secondary: "#66ffcc",
+      primary: "#ffffff",   // blanco para texto principal → legible
+      secondary: "#66ffcc", // verde claro para textos secundarios
     },
 
-    // 🎨 Colores antiguos y extendidos para compatibilidad total
+    // 🎨 Colores extendidos opcionales
     alabaster: { main: "#000000" },
     mineShaft: { main: "#00ff99" },
     gallery: { main: "#0a0a0a" },
-    white: { main: "#00ff99" },
+    white: { main: "#ffffff" },
     diamondBlack: { main: "#000000" },
     alto: { main: "#0a0a0a", light: "#1a1a1a" },
     mountainMist: { main: "#00cc99" },
@@ -29,9 +30,8 @@ export const hackerTheme = createTheme({
     flower: {
       main: "#00ff99",     // verde neón
       light: "#33ffaa",    // hover verde brillante
-      text: "#000000",     // texto negro sobre verde
+      text: "#ffffff",     // texto blanco sobre verde
     },
-    // 🌿 Nuevo color usado en EncryptionPanel y DecryptionPanel
     cottonBoll: {
       main: "#66ffcc",
       text: "#99ffd6", // verde claro para textos secundarios
@@ -40,7 +40,7 @@ export const hackerTheme = createTheme({
 
   typography: {
     fontFamily: "'Share Tech Mono', monospace",
-    allVariants: { color: "#00ff99" },
+    allVariants: { color: "#ffffff" }, // color blanco para todo el texto por defecto
   },
 
   overrides: {
@@ -48,7 +48,7 @@ export const hackerTheme = createTheme({
       root: {
         borderRadius: "8px",
         border: "1px solid #00ff99",
-        color: "#00ff99",
+        color: "#00ff99", // verde neón sobre fondo negro
         transition: "0.3s",
         "&:hover": {
           backgroundColor: "#003322",
@@ -59,17 +59,17 @@ export const hackerTheme = createTheme({
     MuiAppBar: {
       colorPrimary: {
         backgroundColor: "#000000",
-        color: "#00ff99",
+        color: "#ffffff", // texto blanco en el AppBar
       },
     },
   },
 });
 
-// ✅ Aplica el fondo hacker global
+// ✅ Aplica fondo negro y texto blanco a todo el body
 export function checkTheme() {
   if (typeof window !== "undefined") {
     document.body.style.backgroundColor = "#000000";
-    document.body.style.color = "#00ff99";
+    document.body.style.color = "#ffffff";
     document.body.style.fontFamily = "'Share Tech Mono', monospace";
   }
 }

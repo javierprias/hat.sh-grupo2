@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MainContainer from "../src/views/MainContainer";
 import LimitedContainer from "../src/views/LimitedContainer";
 import { ThemeProvider } from "@material-ui/styles";
-import { Theme } from "../src/config/Theme";
+import { hackerTheme, checkTheme } from "../src/config/Theme";
 import LoadingCom from "../src/components/Loading";
 
 const Home = () => {
@@ -11,6 +11,8 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    checkTheme();
+
     const safariBrowser =
       /Safari/.test(navigator.userAgent) &&
       /Apple Computer/.test(navigator.vendor);
@@ -19,13 +21,8 @@ const Home = () => {
         navigator.userAgent
       );
 
-    if (safariBrowser || mobileBrowser) {
-      setBrowserSupport(false);
-    } else {
-      setBrowserSupport(true);
-    }
+    setBrowserSupport(!(safariBrowser || mobileBrowser));
 
-    //register service worker
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("service-worker.js")
@@ -40,17 +37,39 @@ const Home = () => {
           setLoading(false);
         });
     } else {
-      // console.log("did not register sw");
       setSwReg(false);
       setLoading(false);
     }
   }, []);
 
   return (
-    <ThemeProvider theme={Theme}>
+    <ThemeProvider theme={hackerTheme}>
       <LoadingCom open={loading} />
-      {!loading &&
-        (swReg && browserSupport ? <MainContainer /> : <LimitedContainer />)}
+      {!loading && (
+        <>
+          {/* 🌟 Cabecera principal limpia */}
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "50px",
+            }}
+          >
+            <img
+              src="/candado.jpg"
+              alt="Candado"
+              style={{ width: "150px", marginBottom: "20px" }}
+            />
+            <h1 style={{ color: "#00ff00", margin: 0 }}>Hat.sh</h1>
+            <h3 style={{ color: "#00ff00", marginTop: "10px" }}>
+              Simple, fast, secure client-side file encryption
+            </h3>
+            <p style={{ marginTop: "15px", color: "#00ff00" }}>v2.3.6</p>
+          </div>
+
+          {/* 🌟 Contenedor principal de carga de archivos */}
+          {swReg && browserSupport ? <MainContainer /> : <LimitedContainer />}
+        </>
+      )}
     </ThemeProvider>
   );
 };
