@@ -25,6 +25,7 @@ Fortalecer la aplicación original **Hat.sh** mediante un proceso integral que i
 
 ## 🧱 Tecnologías Utilizadas  
 
+- **JavaScript**  
 - **HTML5 / CSS3**  
 - **Node.js**  
 - **Docker**  
