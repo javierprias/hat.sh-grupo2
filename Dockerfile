@@ -1,38 +1,29 @@
-#############################
-#       DEPENDENCIAS
-#############################
-FROM node:18-alpine AS deps
+# Etapa 1: Dependencias
+FROM node:18-alpine3.21 AS deps
 WORKDIR /app
 
-# Necesario para que SWC funcione en Alpine
-RUN apk add --no-cache libc6-compat
+# Fix del CVE crítico: actualizar repos de Alpine y paquetes base
+RUN apk update && apk upgrade --no-cache
 
 COPY package*.json ./
 RUN npm ci
 
-
-#############################
-#           BUILD
-#############################
-FROM node:18-alpine AS builder
+# Etapa 2: Builder
+FROM node:18-alpine3.21 AS builder
 WORKDIR /app
-
-RUN apk add --no-cache libc6-compat
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
+# Etapa 3: Runtime con nginx
+FROM nginx:stable-alpine3.21
 
-#############################
-#          NGINX
-#############################
-FROM nginx:stable-alpine
+# Fix del CVE crítico en Alpine
+RUN apk update && apk upgrade --no-cache
 
 COPY --from=builder /app/out /usr/share/nginx/html
 
 EXPOSE 3991
-
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
